@@ -3,16 +3,16 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:library_mobile/controllers/addBookController.dart';
 import 'package:library_mobile/controllers/bookController.dart';
+import 'package:library_mobile/controllers/editBookController.dart';
 
-class AddBookScreen extends StatefulWidget {
-  const AddBookScreen({Key? key}) : super(key: key);
+class EditBookScreen extends StatefulWidget {
+  const EditBookScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddBookScreen> createState() => _AddBookScreenState();
+  State<EditBookScreen> createState() => _EditBookScreenState();
 }
 
-class _AddBookScreenState extends State<AddBookScreen> {
-  var addBookTextController = new AddBookController();
+class _EditBookScreenState extends State<EditBookScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class _AddBookScreenState extends State<AddBookScreen> {
         padding: EdgeInsets.all(8.0),
         child: ElevatedButton(
           onPressed: () async {
-            await addBookTextController.save();
-            if (addBookTextController.closed.value == true) {
+            await EditBookController.save();
+            if (EditBookController.closed.value == true) {
               BookController.loading = true;
               Get.offAndToNamed('/homeScreen');
             }
           },
           child: Text(
-            "ذخیره",
+            "ویرایش و دخیره",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
@@ -36,7 +36,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "اضافه کردن کتاب",
+          "ویرایش کردن کتاب " + EditBookController.name.value,
         ),
       ),
       body: SafeArea(
@@ -46,29 +46,29 @@ class _AddBookScreenState extends State<AddBookScreen> {
             height: 50,
           ),
           _input("نام کتاب", (value) {
-            addBookTextController.name.value = value;
-          }),
+            EditBookController.name.value = value;
+          },EditBookController.name.value),
           _input("نویسنده", (value) {
-            addBookTextController.writer.value = value;
-          }),
+            EditBookController.writer.value = value;
+          },EditBookController.writer.value),
           _input("سبک", (value) {
-            addBookTextController.style.value = value;
-          }),
+            EditBookController.style.value = value;
+          },EditBookController.style.value),
           _input("جلد ", (value) {
-            addBookTextController.cover.value = value;
-          }),
+            EditBookController.cover.value = value;
+          },EditBookController.cover.value),
           _input("انتشارات ", (value) {
-            addBookTextController.publishers.value = value;
-          }),
+            EditBookController.publishers.value = value;
+          },EditBookController.publishers.value),
           _input("قیمت ", (value) {
-            addBookTextController.price.value = value;
-          }),
+            EditBookController.price.value = value;
+          },EditBookController.price.value),
         ],
       )),
     );
   }
 
-  Container _input(String title, Function onChanged) {
+  Container _input(String title, Function onChanged,String oldValue) {
     return Container(
       padding: EdgeInsets.only(top: 5, left: 5, right: 5),
       height: 62,
@@ -90,6 +90,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
           Container(
             height: 30,
             child: TextField(
+              controller: TextEditingController(text: oldValue),
               textAlign: TextAlign.right,
               decoration: InputDecoration(
                 border: InputBorder.none,

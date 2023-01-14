@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:library_mobile/controllers/bookController.dart';
+import 'package:library_mobile/controllers/editBookController.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -40,6 +41,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Column(
+                          children: [
+                            Text("سینا خضریان"),
+                            Text("ّبرای ویراش کتاب یک بار کلیک کنید"),
+                            Text("ّبرای حذف کتاب یک بار کلیک طولانی کنید"),
+                          ],
+                        );
+                      },
+                      enableDrag: false,
+                    );
+                  },
+                  child: Text(
+                    "برای راهنما کلیلک کنید",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  )),
               SizedBox(
                 height: 50,
               ),
@@ -97,7 +118,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        onTap: () {},
+        onTap: () {
+          EditBookController.id.value = id;
+          EditBookController.name.value = name;
+          EditBookController.cover.value = cover;
+          EditBookController.style.value = style;
+          EditBookController.writer.value = writer;
+          EditBookController.price.value = price;
+          EditBookController.publishers.value = publishers;
+          Get.offAndToNamed('/editBook');
+        },
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
