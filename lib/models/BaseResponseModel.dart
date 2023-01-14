@@ -1,15 +1,19 @@
+import 'dart:convert';
+
 class BaseResponseModel {
   BaseResponseModel({
     required this.message,
     required this.success,
   });
 
-  int success;
-  int message;
+  bool success;
+  String message;
 
-
-  factory BaseResponseModel.fromJson(Map<String, dynamic> json) => BaseResponseModel(
-        success: json["success"],
-        message: json["message"],
-      );
+  factory BaseResponseModel.fromJson(dynamic res) {
+    var jsonData = json.decode(res);
+    return BaseResponseModel(
+      success: jsonData["success"],
+      message: jsonData["message"],
+    );
+  }
 }

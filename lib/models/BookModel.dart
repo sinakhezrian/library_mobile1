@@ -24,11 +24,11 @@ class BookModel {
     return BookModel(
       id: res["id"],
       name: res['name'],
-      writer: res["writer"],
-      cover: res["cover"],
-      style: res["style"],
-      price: res["price"],
-      publishers: res["publishers"],
+      writer: res["writer"] ?? "",
+      cover: res["cover"]?? "",
+      style: res["style"]?? "",
+      price: res["price"]?? "",
+      publishers: res["publishers"]?? "",
     );
   }
 }
