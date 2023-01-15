@@ -1,6 +1,6 @@
 import 'package:library_mobile/api/apiController.dart';
 
-const apiProtocol = RequestProtocolType.http;
-const apiDomain = "192.168.43.245:8000";
+const apiProtocol = RequestProtocolType.https;
+const apiDomain = "library-mobile1.iran.liara.run";
 
  

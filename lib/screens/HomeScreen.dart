@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BookController.getList();
-    Future.delayed(const Duration(seconds: 6)).then((value) => setState(() {}));
+    Future.delayed(const Duration(seconds: 2)).then((value) => setState(() {}));
   }
 
   @override
@@ -48,9 +49,57 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) {
                         return Column(
                           children: [
-                            Text("سینا خضریان"),
-                            Text("ّبرای ویراش کتاب یک بار کلیک کنید"),
-                            Text("ّبرای حذف کتاب یک بار کلیک طولانی کنید"),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "سینا خضریان",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "جهت ویرایش، یک بار روی هر آیتم کلیک کنید",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "جهت حذف، دست رو روی آیتم نگه دارید",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "library-mobile1.iran.liara.run : لینک سرور",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "بک اند با فلاتر نوشته شده",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "اندروید با فلاتر نوشته شده",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Clipboard.setData(ClipboardData(
+                                      text:
+                                          "https://github.com/sinakhezryan/library_mobile1"));
+                                  Get.snackbar("لینک پروژه اندروید",
+                                      "لینک گیت هاب پروژه اندروید با موفقیت کپی شد");
+                                },
+                                child: Text("گیت هاب اندروید")),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Clipboard.setData(ClipboardData(
+                                      text:
+                                          "https://github.com/sinakhezryan/library_mobile1_backend"));
+                                  Get.snackbar("لینک پروژه بک اند",
+                                      "لینک گیت هاب بک اند با موفقیت کپی شد");
+                                },
+                                child: Text("گیت هاب بک اند")),
                           ],
                         );
                       },
@@ -170,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Column(
       children: [
-        (list.length == 0 || BookController.loading == true)
+        (BookController.loading == true)
             ? Container(
                 margin: EdgeInsets.only(bottom: 15),
                 child: Center(child: Text("loading data ...")),
