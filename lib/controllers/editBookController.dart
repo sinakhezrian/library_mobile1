@@ -33,6 +33,8 @@ class EditBookController extends GetxController {
         });
     var data = BaseResponseModel.fromJson(res.body);
     if (data.success == true) {
+      Get.snackbar("موفقیت", "کتاب با موفقیت ویرایش شد");
+
       closed.value = true;
     }
   }

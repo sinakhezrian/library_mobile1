@@ -1,11 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.library_mobile">
+   
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="library_mobile"
+        android:label="sinaKhezryan_library"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+                    android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

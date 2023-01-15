@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:library_mobile/api/apiConfig.dart';
 
@@ -11,8 +12,7 @@ class ApiController {
     Map<String, String> headers,
   ) async {
     print("---- 1> run api request");
-    print(
-        "route:$route - requestType:$type");
+    print("route:$route - requestType:$type");
     var url = (apiProtocol == RequestProtocolType.http)
         ? Uri.http(apiDomain, route)
         : Uri.https(apiDomain, route);
@@ -42,13 +42,13 @@ class ApiController {
             await http.get(url, headers: {...headers, ...defaultHeaders});
       }
       print("---- 2> api request success response : " + response.body);
+      // Get.snackbar("", "api request success response : " + response.body);
       return await response;
     } catch (e) {
       print("---- 2> api request error response : " + e.toString());
-      return {
-        "message": e.toString(), "success": false,
-        "statusCode": 501
-      };
+      // Get.snackbar("", "api request error response : " + e.toString());
+
+      return {"message": e.toString(), "success": false, "statusCode": 501};
     }
   }
 }

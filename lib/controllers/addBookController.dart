@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:library_mobile/api/apiController.dart';
 import 'package:library_mobile/models/BaseResponseModel.dart';
 
@@ -31,6 +32,7 @@ class AddBookController extends GetxController {
         });
     var data = BaseResponseModel.fromJson(res.body);
     if (data.success == true) {
+      Get.snackbar("موفقیت", "کتاب با موفقیت اضافه شد");
       closed.value = true;
     }
   }
